@@ -3,11 +3,11 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <header className="App-header">
         Rancid Tomatillos
       </header>
-    </div>
+    </main>
   );
 }
 
