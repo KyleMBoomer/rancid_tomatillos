@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './MoviePage.css';
 
 function MoviePage({ movie, onBackClick }) {
@@ -11,5 +12,16 @@ function MoviePage({ movie, onBackClick }) {
     </div>
   );
 }
+
+MoviePage.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    backdrop_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    release_date: PropTypes.string.isRequired,
+    average_rating: PropTypes.number.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
+};
 
 export default MoviePage;
