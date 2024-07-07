@@ -1,4 +1,4 @@
-import './MovieCards.css'
+import './MovieCard.css'
 
 
 function MovieCards(props){
