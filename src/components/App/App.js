@@ -48,7 +48,7 @@ function App() {
       ) : (
         <div className="movie-list">
           {movies.map(movie => (
-            <MovieCards key={movie.id} movie={movie} onClick={handleMovieClick} />
+            <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie.id)} />
           ))}
         </div>
       )}
