@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState('');
-  const [selectedMovieId, setSelectedMovieId] = useState(null);
 
   useEffect(() => {
     getMovies();
@@ -27,32 +27,24 @@ function App() {
       });
   };
 
-  const handleMovieClick = (id) => {
-    setSelectedMovieId(id);
-  };
-
-  const handleBackClick = () => {
-    setSelectedMovieId(null);
-  };
-
-  const selectedMovie = movies.find(movie => movie.id === selectedMovieId);
-
   return (
-    <main className="App">
-      <header className="App-header">🍅 Rancid Tomatillos 🍅</header>
-      {error && <p className="error">{error}</p>}
-      {selectedMovie ? (
-        <MoviePage movie={selectedMovie} onBackClick={handleBackClick} />
-      ) : (
-        <div className="movie-list">
-          {movies.map(movie => (
-            <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie.id)} />
-          ))}
-        </div>
-      )}
-    </main>
+    <Router>
+      <main className="App">
+        <header className="App-header">🍅 Rancid Tomatillos 🍅</header>
+        {error && <p className="error">{error}</p>}
+        <Routes>
+          <Route exact path="/" element={
+            <div className="movie-list">
+              {movies.map(movie => (
+                <MovieCards key={movie.id} movie={movie} />
+              ))}
+            </div>
+          } />
+          <Route path="/movies/:movieID" element={<MoviePage />} />
+        </Routes>
+      </main>
+    </Router>
   );
 }
 
 export default App;
-
