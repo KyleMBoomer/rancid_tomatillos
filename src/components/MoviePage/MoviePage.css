@@ -36,7 +36,11 @@
   .white-link {
     color: limegreen; 
   }
-  
-  .white-link:active {
-    color: white;
+
+  .movie-detail button {
+    margin-bottom: 1.25rem;
+    padding: 0.625rem;
+    font-size: 1rem;
   }
+  
+
