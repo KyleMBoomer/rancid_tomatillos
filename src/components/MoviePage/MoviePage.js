@@ -37,10 +37,18 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
   return (
     <div className="movie-detail">
       <button onClick={onBackClick}>Back to All Movies</button>
-      <img src={movie.backdrop_path} alt={`${movie.title} backdrop`} />
-      <h2>{movie.title}</h2>
-      <p>Release Date: {movie.release_date}</p>
-      <p>⭐️ {movie.average_rating.toFixed(2)}</p>
+      <div className='poster'>
+        <img src={movie.poster_path} alt={movie.title} />
+      </div>
+      <div className='movieSpecs'>
+        <h3 className='movie-title'>{movie.title}</h3>
+        <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
+        <h4 className='movie-released'>Released: {movie.release_date}</h4>
+        <div className='overview'>
+          <p>Overview: {movie.overview}</p>
+          <p>Movie Length: {movie.runtime} min.</p>
+        </div>
+      </div>
     </div>
   );
 }
