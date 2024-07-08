@@ -7,9 +7,11 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
   const { movieID } = useParams();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
+  const [movieData, setMovieData] = useState(null) 
 
   useEffect(() => {
-    if (!initialMovie) {
+    setMovie(initialMovie)
+    if (!movieData) {
       handleMovieSelection(movieID);
     }
   }, [movieID, initialMovie]);
@@ -17,6 +19,7 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
   const handleMovieSelection = async (id) => {
     try {
       const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`);
+      console.log('response', response)
       if (!response.ok) {
         throw new Error('Failed to fetch movie details');
       }
