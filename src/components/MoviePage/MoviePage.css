@@ -21,6 +21,7 @@
 }
 .movieSpecs, span {
   width: 65%; 
+  color: white;
 }
 .imagesContainer {
   margin-bottom: 20px; 
