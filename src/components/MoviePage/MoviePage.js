@@ -1,7 +1,39 @@
 import PropTypes from 'prop-types';
 import './MoviePage.css';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-function MoviePage({ movie, onBackClick }) {
+function MoviePage({ movie: initialMovie, onBackClick }) {
+  const { movieID } = useParams();
+  const [movie, setMovie] = useState(initialMovie || null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!initialMovie) {
+      handleMovieSelection(movieID);
+    }
+  }, [movieID, initialMovie]);
+
+  const handleMovieSelection = async (id) => {
+    try {
+      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch movie details');
+      }
+      const data = await response.json();
+      setMovie(data.movie);
+    } catch (error) {
+      setError(true);
+    }
+  };
+
+  if (error) {
+    return <div>Error: Failed to fetch movie details. Please try again later.</div>;
+  }
+
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="movie-detail">
       <button onClick={onBackClick}>Back to All Movies</button>
