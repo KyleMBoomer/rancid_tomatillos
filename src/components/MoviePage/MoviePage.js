@@ -34,8 +34,16 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
   if (!movie) {
     return <div>Loading...</div>;
   }
+
+  const backdropStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url(${movie.backdrop_path})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  };
+
   return (
-    <div className="movie-detail">
+    <div className="movie-detail" style={backdropStyle}>
       <button onClick={onBackClick}>Back to All Movies</button>
       <div className='poster'>
         <img src={movie.poster_path} alt={movie.title} />
