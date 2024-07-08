@@ -1,14 +1,41 @@
 .movie-detail {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+.imagesContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; 
+}
+.poster {
+  width: 48%;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+.poster img {
+  width: 65%; 
+  height: auto; 
+  margin-top: 20%;
+}
+.movieSpecs, span {
+  width: 65%; 
+}
+.imagesContainer {
+  margin-bottom: 20px; 
+}
+.movieSpecs {
+  margin-top: 20px; 
+  text-align: center;
+}
+  .white-link {
+    margin-bottom: 15%;
+  }
+  .white-link {
+    color: limegreen; 
   }
   
-  .movie-detail img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .movie-detail button {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
+  .white-link:active {
+    color: white;
   }
