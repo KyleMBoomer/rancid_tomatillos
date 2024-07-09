@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
-import Dropdown from '../Dropdown/Dropdown'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dropdown from '../Dropdown/Dropdown';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  const [selectedMovie, setSelectedMovie] = useState(null)
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     getMovies();
@@ -23,7 +23,18 @@ function App() {
         }
         return response.json();
       })
-      .then(data => setMovies(data.movies))
+      .then(data => {
+        const moviePromises = data.movies.map(movie =>
+          fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movie.id}`)
+            .then(response => response.json())
+        );
+        Promise.all(moviePromises)
+          .then(movieDetails => setMovies(movieDetails.map(detail => detail.movie)))
+          .catch(error => {
+            console.log(error.message);
+            setError('Whoops, could not fetch your movie details. Refresh the page.');
+          });
+      })
       .catch(error => {
         console.log(error.message);
         setError('Whoops, could not fetch your movies. Refresh the page.');
@@ -38,23 +49,29 @@ function App() {
     ? movies.filter(movie => movie.genres.includes(selectedGenre))
     : movies;
 
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie);
+  };
+
   return (
     <Router>
       <main className="App">
         <header className="App-header">🍅 Rancid Tomatillos 🍅</header>
         {error && <p className="error">{error}</p>}
-        {!selectedMovie && (
-          <GenreDropdown selectedGenre={selectedGenre} handleGenreChange={handleGenreChange} />
-        )}
         <Routes>
           <Route exact path="/" element={
-            <div className="movie-list">
-              {filteredMovies.map(movie => (
-                <MovieCards key={movie.id} movie={movie} onClick={() => setSelectedMovie(movie)} />
-              ))}
-            </div>
+            <>
+              {!selectedMovie && (
+                <Dropdown selectedGenre={selectedGenre} handleGenreChange={handleGenreChange} />
+              )}
+              <div className="movie-list">
+                {filteredMovies.map(movie => (
+                  <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
+                ))}
+              </div>
+            </>
           } />
-          <Route path="/movies/:movieID" element={<MoviePage />} />
+          <Route path="/movies/:movieID" element={<MoviePage onBack={() => setSelectedMovie(null)} />} />
         </Routes>
       </main>
     </Router>

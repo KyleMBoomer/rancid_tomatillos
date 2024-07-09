@@ -3,20 +3,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MoviePage.css';
 
-function MoviePage({ movie: initialMovie }) {
+function MoviePage({ movie: initialMovie, onBack }) {
   const { movieID } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
+  const [movieData, setMovieData] = useState(null)
 
 
   useEffect(() => {
-    if (!initialMovie) {
-      fetchMovie(movieID);
+    setMovie(initialMovie);
+    if (!movieData) {
+      handleMovieSelection(movieID);
     }
-  }, [movieID, initialMovie]);
+  }, [movieID, initialMovie])
 
-  const fetchMovie = async (id) => {
+  const handleMovieSelection = async (id) => {
     try {
       const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
       if (!response.ok) {
@@ -50,12 +52,17 @@ function MoviePage({ movie: initialMovie }) {
     zIndex: '-1'
   };
 
+  const handleBackClick = () => {
+    onBack();
+    navigate('/');
+  };
+
   return (
     <div className="movie-detail" style={backdropStyle}>
-      <button onClick={() => navigate('/')}>Back to All Movies</button>
       <div className='poster'>
         <img src={movie.poster_path} alt={movie.title} />
       </div>
+      <button onClick={handleBackClick}>Back to All Movies</button>
       <div className='movieSpecs'>
         <h3 className='movie-title'>{movie.title}</h3>
         <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
@@ -64,7 +71,6 @@ function MoviePage({ movie: initialMovie }) {
         <div className='overview'>
           <p>Overview: {movie.overview}</p>
           <p>Movie Length: {movie.runtime} min.</p>
-          <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
           <p>Budget: ${movie.budget.toLocaleString()}</p>
           <p>Revenue: ${movie.revenue.toLocaleString()}</p>
           <p>Tagline: {movie.tagline}</p>
@@ -91,6 +97,7 @@ MoviePage.propTypes = {
     runtime: PropTypes.number,
     tagline: PropTypes.string
   }),
+  onBack: PropTypes.func.isRequired,
 };
 
 export default MoviePage;

@@ -1,20 +1,19 @@
 .genre-dropdown {
-    padding: 0.5rem 1rem;
+    margin: 1rem;
+    padding: 0.5rem;
     font-size: 1rem;
-    border: 2px solid #61dafb;
-    border-radius: 0.5rem;
-    background-color: #282c34;
-    color: white;
-    margin: 1rem 0;
-    cursor: pointer;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    appearance: none; 
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); 
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
   }
   
   .genre-dropdown:focus {
     outline: none;
-    border-color: #21a1f1;
-  }
-  
-  .genre-dropdown option {
-    background-color: #282c34;
-    color: white;
+    border-color: #61dafb;
   }
