@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import './MovieCard.css';
+import { useNavigate } from 'react-router-dom';
 
 function MovieCards(props) {
-  const { movie, onClick } = props;
+  const { movie } = props;
+  const navigate = useNavigate();
 
-  const handleClick = (event) => {
-    event.stopPropagation();
-    onClick();
+  const handleClick = () => {
+    navigate(`/movies/${movie.id}`);
   };
 
   return (
@@ -25,7 +26,6 @@ MovieCards.propTypes = {
     title: PropTypes.string.isRequired,
     average_rating: PropTypes.number.isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default MovieCards;

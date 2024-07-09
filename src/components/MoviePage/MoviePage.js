@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import './MoviePage.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-function MoviePage({ movie: initialMovie, onBackClick }) {
+function MoviePage({ movie: initialMovie }) {
   const { movieID } = useParams();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
   const [movieData, setMovieData] = useState(null) 
@@ -42,12 +43,18 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
     backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)), url(${movie.backdrop_path})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: '-1'
   };
 
   return (
     <div className="movie-detail" style={backdropStyle}>
-      <button onClick={onBackClick}>Back to All Movies</button>
+      <button onClick={() => navigate('/')}>Back to All Movies</button>
       <div className='poster'>
         <img src={movie.poster_path} alt={movie.title} />
       </div>
@@ -58,6 +65,10 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
         <div className='overview'>
           <p>Overview: {movie.overview}</p>
           <p>Movie Length: {movie.runtime} min.</p>
+          <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
+          <p>Budget: ${movie.budget.toLocaleString()}</p>
+          <p>Revenue: ${movie.revenue.toLocaleString()}</p>
+          <p>Tagline: {movie.tagline}</p>
         </div>
       </div>
     </div>
@@ -66,13 +77,21 @@ function MoviePage({ movie: initialMovie, onBackClick }) {
 
 MoviePage.propTypes = {
   movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    backdrop_path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    release_date: PropTypes.string.isRequired,
-    average_rating: PropTypes.number.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired,
+    id: PropTypes.number,
+    backdrop_path: PropTypes.string,
+    title: PropTypes.string,
+    release_date: PropTypes.string,
+    average_rating: PropTypes.number,
+    overview: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string
+    })),
+    budget: PropTypes.number,
+    revenue: PropTypes.number,
+    runtime: PropTypes.number,
+    tagline: PropTypes.string
+  }),
 };
 
 export default MoviePage;
