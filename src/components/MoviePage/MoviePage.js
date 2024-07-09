@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import './MoviePage.css';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './MoviePage.css';
 
 function MoviePage({ movie: initialMovie }) {
   const { movieID } = useParams();
