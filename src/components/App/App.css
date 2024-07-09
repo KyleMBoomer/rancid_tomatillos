@@ -40,3 +40,24 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+.genre-dropdown {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #61dafb;
+  border-radius: 0.5rem;
+  background-color: #282c34;
+  color: white;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.genre-dropdown:focus {
+  outline: none;
+  border-color: #21a1f1;
+}
+
+.genre-dropdown option {
+  background-color: #282c34;
+  color: white;
+}

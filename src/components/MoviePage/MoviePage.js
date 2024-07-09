@@ -8,21 +8,19 @@ function MoviePage({ movie: initialMovie }) {
   const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
-  const [movieData, setMovieData] = useState(null) 
+
 
   useEffect(() => {
-    setMovie(initialMovie)
-    if (!movieData) {
-      handleMovieSelection(movieID);
+    if (!initialMovie) {
+      fetchMovie(movieID);
     }
   }, [movieID, initialMovie]);
 
-  const handleMovieSelection = async (id) => {
+  const fetchMovie = async (id) => {
     try {
-      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`);
-      console.log('response', response)
+      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
       if (!response.ok) {
-        throw new Error('Failed to fetch movie details');
+        throw new Error('Failed to fetch movie details.');
       }
       const data = await response.json();
       setMovie(data.movie);
@@ -62,6 +60,7 @@ function MoviePage({ movie: initialMovie }) {
         <h3 className='movie-title'>{movie.title}</h3>
         <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
         <h4 className='movie-released'>Released: {movie.release_date}</h4>
+        <h4 className='genre'>Genre: {movie.genres.join(', ')}</h4>
         <div className='overview'>
           <p>Overview: {movie.overview}</p>
           <p>Movie Length: {movie.runtime} min.</p>
