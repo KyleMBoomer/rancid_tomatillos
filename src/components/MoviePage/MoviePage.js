@@ -3,12 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MoviePage.css';
 
-function MoviePage({ movie: initialMovie, onBack }) {
+function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }) {
   const { movieID } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
   const [movieData, setMovieData] = useState(null)
+  const [trailer, setTrailer] = useState(null)
 
 
   useEffect(() => {
@@ -26,6 +27,14 @@ function MoviePage({ movie: initialMovie, onBack }) {
       }
       const data = await response.json();
       setMovie(data.movie);
+
+      const getVideos = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`)
+      if (!getVideos.ok) {
+        throw new Error('Failed to fetch the trailer for this movie.')
+      }
+      const videoData = await getVideos.json()
+      const trailerVid = videoData.videos.find(video => video.type === 'Trailer')
+      setTrailer(trailerVid)
     } catch (error) {
       setError(true);
     }
@@ -53,16 +62,35 @@ function MoviePage({ movie: initialMovie, onBack }) {
   };
 
   const handleBackClick = () => {
-    onBack();
-    navigate('/');
-  };
+    onBack()
+    navigate('/')
+  }
+
+  const handleBackToGenreClick = () => {
+    onBackToGenre()
+    navigate('/')
+  }
 
   return (
     <div className="movie-detail" style={backdropStyle}>
       <div className='poster'>
-        <img src={movie.poster_path} alt={movie.title} />
+        {trailer && (
+          <div classname='trailer'>
+            <iframe
+            width="1120"
+            height="630"
+            src={`https://www.youtube.com/embed/${trailer.key}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            ></iframe>
+            </div>
+        )}
+ 
       </div>
       <button onClick={handleBackClick}>Back to All Movies</button>
+      {selectedGenre && <button onClick={handleBackToGenreClick}>Back to Genre</button>}
       <div className='movieSpecs'>
         <h3 className='movie-title'>{movie.title}</h3>
         <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>

@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
 import Dropdown from '../Dropdown/Dropdown';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import GlideComponent from '../Glide/Glide'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -43,15 +44,26 @@ function App() {
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
+    setSelectedMovie(null)
   };
+
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie);
+  };
+
+  const handleBackToMovies = () => {
+    setSelectedMovie(null);
+    setSelectedGenre('')
+  }
+
+  const handleBackToGenre = () => {
+    setSelectedMovie(null)
+  }
 
   const filteredMovies = selectedGenre
     ? movies.filter(movie => movie.genres.includes(selectedGenre))
     : movies;
 
-  const handleMovieClick = (movie) => {
-    setSelectedMovie(movie);
-  };
 
   return (
     <Router>
@@ -64,14 +76,18 @@ function App() {
               {!selectedMovie && (
                 <Dropdown selectedGenre={selectedGenre} handleGenreChange={handleGenreChange} />
               )}
-              <div className="movie-list">
-                {filteredMovies.map(movie => (
-                  <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
-                ))}
-              </div>
+              {!selectedGenre ? (
+                <div className="movie-list">
+                  {filteredMovies.map(movie => (
+                    <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
+                  ))}
+                </div>
+              ) : (
+                <GlideComponent movies={filteredMovies} handleMovieClick={handleMovieClick} />
+              )}
             </>
           } />
-          <Route path="/movies/:movieID" element={<MoviePage onBack={() => setSelectedMovie(null)} />} />
+          <Route path="/movies/:movieID" element={<MoviePage onBack={handleBackToMovies} onBackToGenre={handleBackToGenre} selectedGenre={selectedGenre}/>} />
         </Routes>
       </main>
     </Router>
