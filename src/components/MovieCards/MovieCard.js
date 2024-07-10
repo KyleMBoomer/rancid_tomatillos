@@ -1,6 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MovieCard.css';
-import { useNavigate } from 'react-router-dom';
 
 function MovieCards(props) {
   const { movie } = props;
