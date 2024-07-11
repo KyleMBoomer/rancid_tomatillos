@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
 import Dropdown from '../Dropdown/Dropdown';
-import GlideComponent from '../Glide/Glide'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import GlideComponent from '../Glide/Glide';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -25,12 +25,16 @@ function App() {
         return response.json();
       })
       .then(data => {
+        console.log('Movies data:', data);
         const moviePromises = data.movies.map(movie =>
           fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movie.id}`)
             .then(response => response.json())
         );
         Promise.all(moviePromises)
-          .then(movieDetails => setMovies(movieDetails.map(detail => detail.movie)))
+          .then(movieDetails => {
+            console.log('Movie details:', movieDetails);
+            setMovies(movieDetails.map(detail => detail.movie));
+          })
           .catch(error => {
             console.log(error.message);
             setError('Whoops, could not fetch your movie details. Refresh the page.');
@@ -44,7 +48,7 @@ function App() {
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
-    setSelectedMovie(null)
+    setSelectedMovie(null);
   };
 
   const handleMovieClick = (movie) => {
@@ -53,17 +57,22 @@ function App() {
 
   const handleBackToMovies = () => {
     setSelectedMovie(null);
-    setSelectedGenre('')
-  }
+    setSelectedGenre('');
+  };
 
   const handleBackToGenre = () => {
-    setSelectedMovie(null)
-  }
+    setSelectedMovie(null);
+  };
 
   const filteredMovies = selectedGenre
     ? movies.filter(movie => movie.genres.includes(selectedGenre))
     : movies;
 
+  if (movies.length === 0) {
+    console.log('Movies not yet loaded or failed to load');
+  } else {
+    console.log('Movies loaded successfully', movies);
+  }
 
   return (
     <Router>
@@ -79,7 +88,7 @@ function App() {
               {!selectedGenre ? (
                 <div className="movie-list">
                   {filteredMovies.map(movie => (
-                    <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
+                    movie ? <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} /> : null
                   ))}
                 </div>
               ) : (
