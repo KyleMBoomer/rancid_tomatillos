@@ -34,6 +34,7 @@ describe('Movie Page', () => {
     cy.get('button').contains('Back to All Movies').should('be.visible');
     cy.get('button').contains('Back to All Movies').click();
     
+    
     cy.url().should('eq', 'http://localhost:3000/');
   });
 });
