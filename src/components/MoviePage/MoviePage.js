@@ -11,7 +11,6 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
   const [movieData, setMovieData] = useState(null)
   const [trailer, setTrailer] = useState(null)
 
-
   useEffect(() => {
     setMovie(initialMovie);
     if (!movieData) {
@@ -75,19 +74,18 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
     <div className="movie-detail" style={backdropStyle}>
       <div className='poster'>
         {trailer && (
-          <div classname='trailer'>
+          <div className='trailer'>
             <iframe
-            width="1120"
-            height="630"
-            src={`https://www.youtube.com/embed/${trailer.key}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+              width="1120"
+              height="630"
+              src={`https://www.youtube.com/embed/${trailer.key}`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
             ></iframe>
-            </div>
+          </div>
         )}
- 
       </div>
       <button onClick={handleBackClick}>Back to All Movies</button>
       {selectedGenre && <button onClick={handleBackToGenreClick}>Back to Genre</button>}
@@ -116,14 +114,11 @@ MoviePage.propTypes = {
     release_date: PropTypes.string,
     average_rating: PropTypes.number,
     overview: PropTypes.string,
-    genres: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string
-    })),
+    genres: PropTypes.arrayOf(PropTypes.string),
     budget: PropTypes.number,
     revenue: PropTypes.number,
     runtime: PropTypes.number,
-    tagline: PropTypes.string
+    tagline: PropTypes.string,
   }),
   onBack: PropTypes.func.isRequired,
 };
