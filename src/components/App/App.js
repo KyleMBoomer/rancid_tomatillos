@@ -6,6 +6,9 @@ import GlideComponent from '../Glide/Glide'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 
+
+import './App.css';
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState('');

@@ -47,4 +47,5 @@ function GlideComponent({ movies = [], handleMovieClick }) {
     );
 }
 
+
 export default GlideComponent;
