@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
 import Dropdown from '../Dropdown/Dropdown';
+import GlideComponent from '../Glide/Glide'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import './App.css';
 
-import GlideComponent from '../Glide/Glide';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
@@ -47,7 +48,6 @@ function App() {
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
     setSelectedMovie(null)
-
   };
 
   const handleMovieClick = (movie) => {
@@ -56,7 +56,6 @@ function App() {
 
   const handleBackToMovies = () => {
     setSelectedMovie(null);
-
     setSelectedGenre('')
   }
 
@@ -67,7 +66,6 @@ function App() {
   const filteredMovies = selectedGenre
     ? movies.filter(movie => movie.genres.includes(selectedGenre))
     : movies;
-
 
 
   return (
@@ -84,7 +82,7 @@ function App() {
               {!selectedGenre ? (
                 <div className="movie-list">
                   {filteredMovies.map(movie => (
-                    movie ? <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} /> : null
+                    <MovieCards key={movie.id} movie={movie} onClick={() => handleMovieClick(movie)} />
                   ))}
                 </div>
               ) : (
