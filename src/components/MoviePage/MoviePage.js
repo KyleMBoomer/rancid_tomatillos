@@ -8,32 +8,32 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
   const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
-  const [movieData, setMovieData] = useState(null);
-  const [trailer, setTrailer] = useState(null);
+  const [movieData, setMovieData] = useState(null)
+  const [trailer, setTrailer] = useState(null)
 
   useEffect(() => {
     setMovie(initialMovie);
     if (!movieData) {
       handleMovieSelection(movieID);
     }
-  }, [movieID, initialMovie]);
+  }, [movieID, initialMovie])
 
   const handleMovieSelection = async (id) => {
     try {
-      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`);
+      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
       if (!response.ok) {
         throw new Error('Failed to fetch movie details.');
       }
       const data = await response.json();
       setMovie(data.movie);
 
-      const getVideos = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`);
+      const getVideos = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`)
       if (!getVideos.ok) {
-        throw new Error('Failed to fetch the trailer for this movie.');
+        throw new Error('Failed to fetch the trailer for this movie.')
       }
-      const videoData = await getVideos.json();
-      const trailerVid = videoData.videos.find(video => video.type === 'Trailer');
-      setTrailer(trailerVid);
+      const videoData = await getVideos.json()
+      const trailerVid = videoData.videos.find(video => video.type === 'Trailer')
+      setTrailer(trailerVid)
     } catch (error) {
       setError(true);
     }
@@ -61,20 +61,19 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
   };
 
   const handleBackClick = () => {
-    onBack();
-    navigate('/');
-  };
+    onBack()
+    navigate('/')
+  }
 
   const handleBackToGenreClick = () => {
-    onBackToGenre();
-    navigate('/');
-  };
+    onBackToGenre()
+    navigate('/')
+  }
 
-  return (
-    <div className="movie-detail" style={backdropStyle}>
-      <div className='poster'>
-        {trailer && (
-          <div className='trailer'>
+    return (
+      <div className="movie-detail" style={backdropStyle}>
+        <div className='poster'>
+          {trailer && (
             <iframe
               src={`https://www.youtube.com/embed/${trailer.key}`}
               title="YouTube video player"
@@ -82,26 +81,25 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
+          )}
+        </div>
+        <button onClick={handleBackClick}>Back to All Movies</button>
+        {selectedGenre && <button onClick={handleBackToGenreClick}>Back to Genre</button>}
+        <div className='movieSpecs'>
+          <h3 className='movie-title'>{movie.title}</h3>
+          <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
+          <h4 className='movie-released'>Released: {movie.release_date}</h4>
+          <h4 className='genre'>Genre: {movie.genres.join(', ')}</h4>
+          <div className='overview'>
+            <p>Overview: {movie.overview}</p>
+            <p>Movie Length: {movie.runtime} min.</p>
+            <p>Budget: ${movie.budget.toLocaleString()}</p>
+            <p>Revenue: ${movie.revenue.toLocaleString()}</p>
+            <p>Tagline: {movie.tagline}</p>
           </div>
-        )}
-      </div>
-      <button onClick={handleBackClick}>Back to All Movies</button>
-      {selectedGenre && <button onClick={handleBackToGenreClick}>Back to Genre</button>}
-      <div className='movieSpecs'>
-        <h3 className='movie-title'>{movie.title}</h3>
-        <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
-        <h4 className='movie-released'>Released: {movie.release_date}</h4>
-        <h4 className='genre'>Genre: {movie.genres.join(', ')}</h4>
-        <div className='overview'>
-          <p>Overview: {movie.overview}</p>
-          <p>Movie Length: {movie.runtime} min.</p>
-          <p>Budget: ${movie.budget.toLocaleString()}</p>
-          <p>Revenue: ${movie.revenue.toLocaleString()}</p>
-          <p>Tagline: {movie.tagline}</p>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 MoviePage.propTypes = {
