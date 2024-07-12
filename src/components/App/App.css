@@ -73,3 +73,39 @@
     padding: 0.75rem;
   }
 }
+
+
+@media only screen and (min-width: 1024px) {
+  .App-header {
+    font-size: calc(1rem + 3vmin);
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .movie-cards {
+    width: 80%;
+    padding: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .App-header {
+    font-size: calc(1rem + 4vmin);
+  
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 2rem;
+    padding: 3rem;
+  }
+
+  .movie-cards {
+    width: 70%;
+    padding: 2rem;
+  }
+}
