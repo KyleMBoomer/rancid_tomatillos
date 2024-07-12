@@ -8,32 +8,32 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
   const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
-  const [movieData, setMovieData] = useState(null)
-  const [trailer, setTrailer] = useState(null)
+  const [movieData, setMovieData] = useState(null);
+  const [trailer, setTrailer] = useState(null);
 
   useEffect(() => {
     setMovie(initialMovie);
     if (!movieData) {
       handleMovieSelection(movieID);
     }
-  }, [movieID, initialMovie])
+  }, [movieID, initialMovie]);
 
   const handleMovieSelection = async (id) => {
     try {
-      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+      const response = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch movie details.');
       }
       const data = await response.json();
       setMovie(data.movie);
 
-      const getVideos = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`)
+      const getVideos = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`);
       if (!getVideos.ok) {
-        throw new Error('Failed to fetch the trailer for this movie.')
+        throw new Error('Failed to fetch the trailer for this movie.');
       }
-      const videoData = await getVideos.json()
-      const trailerVid = videoData.videos.find(video => video.type === 'Trailer')
-      setTrailer(trailerVid)
+      const videoData = await getVideos.json();
+      const trailerVid = videoData.videos.find(video => video.type === 'Trailer');
+      setTrailer(trailerVid);
     } catch (error) {
       setError(true);
     }
@@ -61,14 +61,14 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
   };
 
   const handleBackClick = () => {
-    onBack()
-    navigate('/')
-  }
+    onBack();
+    navigate('/');
+  };
 
   const handleBackToGenreClick = () => {
-    onBackToGenre()
-    navigate('/')
-  }
+    onBackToGenre();
+    navigate('/');
+  };
 
   return (
     <div className="movie-detail" style={backdropStyle}>
@@ -76,8 +76,6 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
         {trailer && (
           <div className='trailer'>
             <iframe
-              width="1120"
-              height="630"
               src={`https://www.youtube.com/embed/${trailer.key}`}
               title="YouTube video player"
               frameBorder="0"
