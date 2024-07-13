@@ -70,40 +70,36 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
     navigate('/')
   }
 
-  return (
-    <div className="movie-detail" style={backdropStyle}>
-      <div className='poster'>
-        {trailer && (
-          <div className='trailer'>
+    return (
+      <div className="movie-detail" style={backdropStyle}>
+        <div className='poster'>
+          {trailer && (
             <iframe
-              width="1120"
-              height="630"
               src={`https://www.youtube.com/embed/${trailer.key}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
+          )}
+        </div>
+        <button onClick={handleBackClick}>Back to All Movies</button>
+        {selectedGenre && <button onClick={handleBackToGenreClick}>Back to Genre</button>}
+        <div className='movieSpecs'>
+          <h3 className='movie-title'>{movie.title}</h3>
+          <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
+          <h4 className='movie-released'>Released: {movie.release_date}</h4>
+          <h4 className='genre'>Genre: {movie.genres.join(', ')}</h4>
+          <div className='overview'>
+            <p>Overview: {movie.overview}</p>
+            <p>Movie Length: {movie.runtime} min.</p>
+            <p>Budget: ${movie.budget.toLocaleString()}</p>
+            <p>Revenue: ${movie.revenue.toLocaleString()}</p>
+            <p>Tagline: {movie.tagline}</p>
           </div>
-        )}
-      </div>
-      <button onClick={handleBackClick}>Back to All Movies</button>
-      {selectedGenre && <button onClick={handleBackToGenreClick}>Back to Genre</button>}
-      <div className='movieSpecs'>
-        <h3 className='movie-title'>{movie.title}</h3>
-        <h4 className='movie-rating'>⭐️ {movie.average_rating.toFixed(2)}</h4>
-        <h4 className='movie-released'>Released: {movie.release_date}</h4>
-        <h4 className='genre'>Genre: {movie.genres.join(', ')}</h4>
-        <div className='overview'>
-          <p>Overview: {movie.overview}</p>
-          <p>Movie Length: {movie.runtime} min.</p>
-          <p>Budget: ${movie.budget.toLocaleString()}</p>
-          <p>Revenue: ${movie.revenue.toLocaleString()}</p>
-          <p>Tagline: {movie.tagline}</p>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 MoviePage.propTypes = {

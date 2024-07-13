@@ -25,8 +25,8 @@ describe('Movie Page', () => {
       cy.get('p').eq(4).should('contain.text', `Tagline: ${movie.tagline}`);
     });
 
-    if (movie.trailer) {
-      cy.get('.trailer iframe').should('have.attr', 'src', `https://www.youtube.com/embed/${movie.trailer.key}`);
+    if (movie.poster) {
+      cy.get('.poster iframe').should('have.attr', 'src', `https://www.youtube.com/embed/${movie.trailer.key}`);
     }
   });
 
