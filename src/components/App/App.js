@@ -2,11 +2,8 @@ import { useState, useEffect } from 'react';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
 import Dropdown from '../Dropdown/Dropdown';
-import GlideComponent from '../Glide/Glide'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import './App.css';
-
-
+import GlideComponent from '../Glide/Glide';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -47,7 +44,7 @@ function App() {
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
-    setSelectedMovie(null)
+    setSelectedMovie(null);
   };
 
   const handleMovieClick = (movie) => {
@@ -56,17 +53,16 @@ function App() {
 
   const handleBackToMovies = () => {
     setSelectedMovie(null);
-    setSelectedGenre('')
-  }
+    setSelectedGenre('');
+  };
 
   const handleBackToGenre = () => {
-    setSelectedMovie(null)
-  }
+    setSelectedMovie(null);
+  };
 
   const filteredMovies = selectedGenre
     ? movies.filter(movie => movie.genres.includes(selectedGenre))
     : movies;
-
 
   return (
     <Router>
@@ -90,7 +86,14 @@ function App() {
               )}
             </>
           } />
-          <Route path="/movies/:movieID" element={<MoviePage onBack={handleBackToMovies} onBackToGenre={handleBackToGenre} selectedGenre={selectedGenre}/>} />
+          <Route path="/movies/:movieID" element={
+            <MoviePage
+              onBack={handleBackToMovies}
+              onBackToGenre={handleBackToGenre}
+              selectedGenre={selectedGenre}
+              movie={selectedMovie}
+            />
+          } />
         </Routes>
       </main>
     </Router>
