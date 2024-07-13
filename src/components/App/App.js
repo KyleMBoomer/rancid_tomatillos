@@ -4,7 +4,8 @@ import MoviePage from '../MoviePage/MoviePage';
 import Dropdown from '../Dropdown/Dropdown';
 import GlideComponent from '../Glide/Glide';
 import SearchBar from '../SearchBar/SearchBar';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
 import './App.css';
 
 function App() {
@@ -62,8 +63,8 @@ function App() {
     setSelectedMovie(null);
   };
 
-  const handleSearchChange = (query) => {
-    setSearchQuery(query);
+  const handleSearchChange = (event) => {
+    setSearchQuery(event);
   };
 
   const filteredMovies = movies.filter(movie =>
@@ -74,7 +75,9 @@ function App() {
   return (
     <Router>
       <main className="App">
-        <header className="App-header">🍅 Rancid Tomatillos 🍅</header>
+        <header className="App-header">
+          <Link to="/" className="header-link">🍅 Rancid Tomatillos 🍅</Link>
+        </header>
         {error && <p className="error">{error}</p>}
         <Routes>
           <Route exact path="/" element={
