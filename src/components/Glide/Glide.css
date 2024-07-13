@@ -1,27 +1,30 @@
-
 .glide {
-    max-width: 85%;
-    margin: auto;
-    padding: 1rem;
-  }
-  
-  .glide__slide {
-    text-align: center;
-  }
-  
-  .glide__arrow {
-    background: #333;
-    color: white;
-    border: none;
-    padding: 1rem;
-    cursor: pointer;
-  }
-  
-  .glide__arrow--left {
-    left: -1.5rem;
-  }
-  
-  .glide__arrow--right {
-    right: -1.5rem;
-  }
-  
+  max-width: 85%;
+  margin: auto;
+  padding: 1rem;
+}
+
+.glide__slides {
+  padding-left: 2.3rem;
+}
+
+.glide__slide {
+  text-align: center; /* Center content within each slide */
+  flex: 0 0 auto; /* Ensure slides do not grow and stay centered */
+}
+
+.glide__arrow {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.glide__arrow--left {
+  left: -1.5rem;
+}
+
+.glide__arrow--right {
+  right: -1.5rem;
+}

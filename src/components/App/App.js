@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react';
 import MovieCards from '../MovieCards/MovieCard';
 import MoviePage from '../MoviePage/MoviePage';
 import Dropdown from '../Dropdown/Dropdown';
-import GlideComponent from '../Glide/Glide'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import './App.css';
-
+import GlideComponent from '../Glide/Glide';
+import SearchBar from '../SearchBar/SearchBar';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 import './App.css';
 
@@ -14,6 +13,7 @@ function App() {
   const [error, setError] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     getMovies();
@@ -47,7 +47,7 @@ function App() {
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
-    setSelectedMovie(null)
+    setSelectedMovie(null);
   };
 
   const handleMovieClick = (movie) => {
@@ -56,26 +56,33 @@ function App() {
 
   const handleBackToMovies = () => {
     setSelectedMovie(null);
-    setSelectedGenre('')
-  }
+    setSelectedGenre('');
+  };
 
   const handleBackToGenre = () => {
-    setSelectedMovie(null)
-  }
+    setSelectedMovie(null);
+  };
 
-  const filteredMovies = selectedGenre
-    ? movies.filter(movie => movie.genres.includes(selectedGenre))
-    : movies;
+  const handleSearchChange = (event) => {
+    setSearchQuery(event);
+  };
 
+  const filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    (selectedGenre ? movie.genres.includes(selectedGenre) : true)
+  );
 
   return (
     <Router>
       <main className="App">
-        <header className="App-header">🍅 Rancid Tomatillos 🍅</header>
+        <header className="App-header">
+          <Link to="/" className="header-link">🍅 Rancid Tomatillos 🍅</Link>
+        </header>
         {error && <p className="error">{error}</p>}
         <Routes>
           <Route exact path="/" element={
             <>
+              <SearchBar searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
               {!selectedMovie && (
                 <Dropdown selectedGenre={selectedGenre} handleGenreChange={handleGenreChange} />
               )}
@@ -90,7 +97,9 @@ function App() {
               )}
             </>
           } />
-          <Route path="/movies/:movieID" element={<MoviePage onBack={handleBackToMovies} onBackToGenre={handleBackToGenre} selectedGenre={selectedGenre}/>} />
+          <Route path="/movies/:movieID" element={
+            <MoviePage onBack={handleBackToMovies} onBackToGenre={handleBackToGenre} selectedGenre={selectedGenre} />
+          } />
         </Routes>
       </main>
     </Router>

@@ -34,7 +34,6 @@ function GlideComponent({ movies = [], handleMovieClick }) {
                     {movies.map(movie => (
                         <li className="glide__slide" key={movie.id}>
                             <MovieCards movie={movie} onClick={() => handleMovieClick(movie)} />
-                            <div>{movie.title}</div>
                         </li>
                     ))}
                 </ul>
