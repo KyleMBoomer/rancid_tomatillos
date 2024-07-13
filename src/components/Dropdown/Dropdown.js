@@ -17,6 +17,8 @@ const Dropdown = ({ selectedGenre, handleGenreChange }) => {
                 <option value="Science Fiction">Science Fiction</option>
                 <option value="Drama">Drama</option>
                 <option value="Horror">Horror</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Family">Family</option>
             </select>
         </div>
     );

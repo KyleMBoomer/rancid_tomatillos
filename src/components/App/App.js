@@ -5,7 +5,6 @@ import Dropdown from '../Dropdown/Dropdown';
 import GlideComponent from '../Glide/Glide';
 import SearchBar from '../SearchBar/SearchBar';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-
 import './App.css';
 
 function App() {
@@ -98,7 +97,13 @@ function App() {
             </>
           } />
           <Route path="/movies/:movieID" element={
-            <MoviePage onBack={handleBackToMovies} onBackToGenre={handleBackToGenre} selectedGenre={selectedGenre} />
+
+            <MoviePage
+              onBack={handleBackToMovies}
+              onBackToGenre={handleBackToGenre}
+              selectedGenre={selectedGenre}
+              movie={selectedMovie}
+            />
           } />
         </Routes>
       </main>
