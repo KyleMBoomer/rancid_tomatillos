@@ -1,17 +1,21 @@
-import { movieDetails } from '../support/mockData';
-
 describe('Movie Page', () => {
+  let movieId = 436270;
+  let movie;
+
   beforeEach(() => {
-    cy.intercept('GET', `https://rancid-tomatillos.herokuapp.com/api/v2/movies/436270`, {
-      statusCode: 200,
-      body: { movie: movieDetails[436270] },
-    }).as('getMovie');
-    
-    cy.visit('http://localhost:3000/movies/436270');
+    cy.fixture('movieDetails').then((details) => {
+      movie = details[movieId];
+
+      cy.intercept('GET', `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`, {
+        statusCode: 200,
+        body: { movie },
+      }).as('getMovie');
+
+      cy.visit(`http://localhost:3000/movies/${movieId}`);
+    });
   });
 
   it('should display the movie details when the page loads', () => {
-    const movie = movieDetails[436270];
     cy.wait('@getMovie');
     cy.get('.movie-title').should('contain.text', movie.title);
     cy.get('.movie-rating').should('contain.text', `⭐️ ${movie.average_rating.toFixed(2)}`);
@@ -25,16 +29,16 @@ describe('Movie Page', () => {
       cy.get('p').eq(4).should('contain.text', `Tagline: ${movie.tagline}`);
     });
 
-    if (movie.poster) {
-      cy.get('.poster iframe').should('have.attr', 'src', `https://www.youtube.com/embed/${movie.trailer.key}`);
+    if (movie.trailer) {
+      cy.get('.poster iframe')
+        .should('have.attr', 'src')
+        .and('include', `https://www.youtube.com/embed/${movie.trailer}`);
     }
   });
 
   it('should have a "Back to All Movies" button that navigates back to the main page', () => {
     cy.get('button').contains('Back to All Movies').should('be.visible');
     cy.get('button').contains('Back to All Movies').click();
-    
-    
     cy.url().should('eq', 'http://localhost:3000/');
   });
 });

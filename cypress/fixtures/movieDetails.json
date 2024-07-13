@@ -1,51 +1,44 @@
 {
-    "436270": {
-      "movie": {
-        "id": 436270,
-        "title": "Black Adam",
-        "poster_path": "https://image.tmdb.org/t/p/original//pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
-        "backdrop_path": "https://image.tmdb.org/t/p/original//bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
-        "release_date": "2022-10-19",
-        "overview": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
-        "genres": ["Action", "Fantasy", "Science Fiction"],
-        "budget": 200000000,
-        "revenue": 384571691,
-        "runtime": 125,
-        "tagline": "The world needed a hero. It got Black Adam.",
-        "average_rating": 4
-      }
-    },
-    "982620": {
-      "movie": {
-        "id": 982620,
-        "title": "Maneater",
-        "poster_path": "https://image.tmdb.org/t/p/original//pwf3DGuWB1AptvIzHhlGxDUNnQX.jpg",
-        "backdrop_path": "https://image.tmdb.org/t/p/original//jHKNqz0LjM2dOUv5XDPmcSoYPEW.jpg",
-        "release_date": "2022-08-26",
-        "overview": "A group of friends on vacation in a seeming island paradise are stalked by an unrelenting great white after an accident leaves them stranded and left for dead.",
-        "genres": ["Thriller", "Horror"],
-        "budget": 0,
-        "revenue": 0,
-        "runtime": 86,
-        "tagline": "200 teeth. 0 chance.",
-        "average_rating": 7
-      }
-    },
-    "1037858": {
-      "movie": {
-        "id": 1037858,
-        "title": "The Soccer Football Movie",
-        "poster_path": "https://image.tmdb.org/t/p/original//sWoYDNPNZs5MtzPbirXV73tIHrA.jpg",
-        "backdrop_path": "https://image.tmdb.org/t/p/original//sqVxhRkPwOo6jogWZjE99V1HRE1.jpg",
-        "release_date": "2022-11-09",
-        "overview": "When mysterious green slime monsters start popping out of soccer balls, all-star athletes Zlatan Ibrahimović and Megan Rapinoe must team up with their four biggest fans to stop evil scientist \"Weird Al\" Yankovic from stealing their talent.",
-        "genres": ["Animation", "Comedy", "Family"],
-        "budget": 0,
-        "revenue": 0,
-        "runtime": 74,
-        "tagline": "",
-        "average_rating": 6.5
-      }
-    }
+  "436270": {
+    "id": 436270,
+    "title": "Black Adam",
+    "poster_path": "https://image.tmdb.org/t/p/original//pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
+    "backdrop_path": "https://image.tmdb.org/t/p/original//bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+    "release_date": "2022-10-19",
+    "overview": "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+    "genres": ["Action", "Fantasy", "Science Fiction"],
+    "budget": 200000000,
+    "revenue": 384571691,
+    "runtime": 125,
+    "tagline": "The world needed a hero. It got Black Adam.",
+    "average_rating": 4
+  },
+  "982620": {
+    "id": 982620,
+    "title": "Maneater",
+    "poster_path": "https://image.tmdb.org/t/p/original//pwf3DGuWB1AptvIzHhlGxDUNnQX.jpg",
+    "backdrop_path": "https://image.tmdb.org/t/p/original//jHKNqz0LjM2dOUv5XDPmcSoYPEW.jpg",
+    "release_date": "2022-08-26",
+    "overview": "A group of friends on vacation in a seeming island paradise are stalked by an unrelenting great white after an accident leaves them stranded and left for dead.",
+    "genres": ["Thriller", "Horror"],
+    "budget": 0,
+    "revenue": 0,
+    "runtime": 86,
+    "tagline": "200 teeth. 0 chance.",
+    "average_rating": 7
+  },
+  "1037858": {
+    "id": 1037858,
+    "title": "The Soccer Football Movie",
+    "poster_path": "https://image.tmdb.org/t/p/original//sWoYDNPNZs5MtzPbirXV73tIHrA.jpg",
+    "backdrop_path": "https://image.tmdb.org/t/p/original//sqVxhRkPwOo6jogWZjE99V1HRE1.jpg",
+    "release_date": "2022-11-09",
+    "overview": "When mysterious green slime monsters start popping out of soccer balls, all-star athletes Zlatan Ibrahimović and Megan Rapinoe must team up with their four biggest fans to stop evil scientist \"Weird Al\" Yankovic from stealing their talent.",
+    "genres": ["Animation", "Comedy", "Family"],
+    "budget": 0,
+    "revenue": 0,
+    "runtime": 74,
+    "tagline": "",
+    "average_rating": 6.5
   }
-  
+}

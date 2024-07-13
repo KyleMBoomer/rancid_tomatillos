@@ -1,4 +1,4 @@
-import { movies } from '../support/mockData';
+import { movies } from '../fixtures/movies';
 
 describe('Movie Cards Page', () => {
   beforeEach(() => {
