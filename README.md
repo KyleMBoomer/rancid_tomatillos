@@ -2,7 +2,7 @@
 Rancid Tomatillos is a web application similar to rotten tomatoes,netflix etc. that allows a user to pick a movie, view the trailer via a YouTube window, see a synopsis, a rating, and a general overview of the movie. 
 
 # Tech Stack: 
-JavaScript, React.js, Glide.js, CSS, and HTML
+JavaScript, React.js, Glide.js, CSS, HTML; tested with Cypress. 
 
 # App preview:
 [Check it out](https://kylemboomer.github.io/rancid_tomatillos) for yourself. Be sure to click the banner to load the app! 
