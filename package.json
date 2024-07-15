@@ -1,7 +1,7 @@
 {
   "name": "rancid_tomatillos",
   "version": "0.1.0",
-  "homepage": "https://kylemboomer.github.io/rancid-tomatillos",
+  "homepage": "https://kylemboomer.github.io/rancid_tomatillos",
   "private": true,
   "dependencies": {
     "@glidejs/glide": "^3.6.2",
