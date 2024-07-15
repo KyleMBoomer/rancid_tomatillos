@@ -1,5 +1,5 @@
 # Abstract: 
-Rancid Tomatillos is a web application similar to rotten tomatoes,netflix etc. that allows a user to pick a movie, view the trailer via a YouTube window, see a synopsis, a rating, and a general overview of the movie. 
+Rancid Tomatillos is a web application similar to Rotten Tomatoes, Netflix, or IMDB. Users may search for a specific movie, or filter by genre, to view the trailer via a YouTube window, see a synopsis, a rating, and a general overview of the movie. Future iterations will enable users to rate their own movies, and create a Favorite Movies page. 
 
 # Tech Stack: 
 JavaScript, React.js, Glide.js, CSS, HTML; tested with Cypress. 
