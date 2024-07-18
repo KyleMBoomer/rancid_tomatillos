@@ -8,9 +8,9 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router basename="/rancid_tomatillos">
-      <App />
+    <Router basename="/">
     </Router>
+      <App />
   </React.StrictMode>
 );
 
