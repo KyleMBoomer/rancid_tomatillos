@@ -79,7 +79,7 @@ function App() {
         </header>
         {error && <p className="error">{error}</p>}
         <Routes>
-          <Route path="/" element={
+          <Route exact path="/" element={
             <>
               <SearchBar searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
               {!selectedMovie && (
