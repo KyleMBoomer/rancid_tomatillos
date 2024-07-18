@@ -5,7 +5,7 @@ Rancid Tomatillos is a web application similar to Rotten Tomatoes, Netflix, or I
 JavaScript, React.js, Glide.js, CSS, HTML; tested with Cypress. 
 
 # App preview:
-[Check it out](https://kylemboomer.github.io/rancid_tomatillos) for yourself. Be sure to click the banner to load the app! 
+[Check it out](https://kylemboomer.github.io/rancid_tomatillos/) for yourself. Be sure to click the banner to load the app! 
 
 <img width="1370" alt="Screenshot 2024-07-13 at 2 58 17 PM" src="https://github.com/user-attachments/assets/98df2455-a8b1-4da8-a55b-7486dd40780b">
 
