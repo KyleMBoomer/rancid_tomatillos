@@ -8,12 +8,11 @@ function MoviePage({ movie: initialMovie, onBack, onBackToGenre, selectedGenre }
   const navigate = useNavigate();
   const [movie, setMovie] = useState(initialMovie || null);
   const [error, setError] = useState(false);
-  const [movieData, setMovieData] = useState(null)
   const [trailer, setTrailer] = useState(null)
 
   useEffect(() => {
     setMovie(initialMovie);
-    if (!movieData) {
+    if (!initialMovie) {
       handleMovieSelection(movieID);
     }
   }, [movieID, initialMovie])
